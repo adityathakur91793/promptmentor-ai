@@ -1,0 +1,3 @@
+const BASE=import.meta.env.VITE_API_URL || 'http://localhost:8000';
+async function call(path,body){const r=await fetch(`${BASE}${path}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});if(!r.ok){const e=await r.json().catch(()=>({}));throw new Error(e.detail||'Something went wrong. Please try again.')}return r.json()}
+export const api={generate:p=>call('/api/projects/generate',p),explore:(idea,profile)=>call('/api/projects/explore',{idea,profile}),refine:(plan,instruction,profile)=>call('/api/projects/refine',{plan,instruction,profile}),chat:(plan,question)=>call('/api/mentor/chat',{plan,question})};
