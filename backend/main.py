@@ -5,7 +5,7 @@ from models.schemas import ChatRequest, ChatResponse, ExploreRequest, GenerateRe
 from services.gemini_service import create_plan, generate_ideas, mentor_chat, refine_plan
 
 app = FastAPI(title="ProjectMentor AI API", version="1.0.0")
-app.add_middleware(CORSMiddleware, allow_origins=["http://localhost:5173", "http://127.0.0.1:5173"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
+app.add_middleware(CORSMiddleware, allow_origins=["http://localhost:5173", "http://127.0.0.1:5173", "https://promptmentor-ai.onrender.com"], allow_credentials=True, allow_methods=["*"], allow_headers=["*"])
 @app.get("/api/health")
 def health(): return {"status": "ok", "provider": "gemini", "demo_mode": not bool(os.getenv("GEMINI_API_KEY"))}
 @app.post("/api/projects/generate", response_model=GenerateResponse)
